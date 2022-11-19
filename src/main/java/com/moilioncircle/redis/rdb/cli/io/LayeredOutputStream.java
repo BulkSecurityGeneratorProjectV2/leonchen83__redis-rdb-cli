@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.util.Iterator;
 
@@ -149,7 +150,7 @@ public class LayeredOutputStream extends OutputStream {
             } else {
                 path = new File(this.path);
             }
-            File temp = createTempFile(prefix, null, path);
+            File temp = Files.createTempFile(path.toPath(), prefix, null).toFile();
             file = open(temp.toPath(), OPTIONS);
         }
         ByteBuffer buf = this.buffer.toByteBuffer();
